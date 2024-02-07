@@ -15,19 +15,22 @@ cd ~/pihole
 echo "
 version: '3'
 
+# More info at https://github.com/pi-hole/docker-pi-hole/
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    network_mode: host # Because DHCP
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 80:80/tcp
     environment:
-      TZ: America/Chicago
+      TZ: Europe/Stockholm
       WEBPASSWORD: $PASSWORD
+    # Volumes store your data between container upgrades
     volumes:
       - ./etc-pihole:/etc/pihole
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
-    cap_add:
-      - NET_ADMIN
     restart: unless-stopped
 " > docker-compose.yml
 
