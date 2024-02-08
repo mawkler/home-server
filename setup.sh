@@ -6,18 +6,8 @@ if [ -z "$PASSWORD" ]; then
 	exit 1
 fi
 
-echo "Installing docker-compose and unbound"
-sudo pacman --needed -S docker docker-compose unbound
-
-echo "Setting up unbound"
-sudo cp unbound/pi-hole.conf /etc/unbound/unbound.conf
-sudo systemctl start unbound
-
-echo '
-name_servers="::1 127.0.0.1"
-resolv_conf_options="trust-ad"
-' | sudo tee /etc/resolvconf.conf
-sudo resolvconf -u
+echo "Installing docker-compose"
+sudo pacman --needed -S docker docker-compose
 
 mkdir -p ~/pihole
 cd ~/pihole
@@ -37,8 +27,6 @@ services:
     environment:
       TZ: Europe/Stockholm
       WEBPASSWORD: $PASSWORD
-      DNS1: 127.0.0.1#5335
-      DNS2: no
     # Volumes store your data between container upgrades
     volumes:
       - ./etc-pihole:/etc/pihole
