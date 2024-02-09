@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   # More info at https://github.com/pi-hole/docker-pi-hole/
@@ -22,7 +22,7 @@ services:
     image: portainer/portainer-ce
     restart: always
     ports:
-      - "9000:9000/tcp"
+      - 9000:9000/tcp
     environment:
       - Europe/Stockholm
     volumes:
