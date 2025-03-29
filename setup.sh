@@ -1,8 +1,7 @@
 #!/usr/bin/bash
 
-PASSWORD=$1
 if [ -z "$PASSWORD" ]; then
-	echo 'No password argument passwed in'
+	echo '$PASSWORD variable not set'
 	exit 1
 fi
 

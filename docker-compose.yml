@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   # More info at https://github.com/pi-hole/docker-pi-hole/
   pihole:
@@ -11,10 +9,10 @@ services:
       - 80:80/tcp
     environment:
       TZ: Europe/Stockholm
-      WEBPASSWORD: $PASSWORD
+      FTLCONF_webserver_api_password: $PASSWORD
+      FTLCONF_dns_listeningMode: 'all'
     volumes:
       - ./etc-pihole:/etc/pihole
-      - ./etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
 
   portainer:
